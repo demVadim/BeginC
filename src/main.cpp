@@ -29,6 +29,7 @@ int main(void)
     }    
 
     /* Loop until the user closes the window */
+    glClearColor(0.0, 0.7, 0.0, 1.0);
     while (!glfwWindowShouldClose(window))
     {
         /* Render here */
