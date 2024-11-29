@@ -3,7 +3,7 @@
 #include <glfw/glfw3.h>
 #include <iostream>
 
-
+//я нихрена не сделал сегодня!!!
 
 int main(void)
 {
