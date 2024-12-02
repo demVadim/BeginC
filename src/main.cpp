@@ -3,7 +3,10 @@
 #include <glfw/glfw3.h>
 #include <iostream>
 
-//я нихрена не сделал сегодня!!!
+void framebuffer_size_callback(GLFWwindow* window, int width, int height); 
+
+const unsigned int SCR_WIDTH = 800;
+const unsigned int SCR_HEIGHT = 600;
 
 int main(void)
 {
@@ -13,7 +16,7 @@ int main(void)
     if (!glfwInit())
         return -1;
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Hello World", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
