@@ -3,7 +3,8 @@
 #include <glfw/glfw3.h>
 #include <iostream>
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height); 
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void processInput(GLFWwindow *window); 
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
@@ -24,6 +25,7 @@ int main(void)
     }
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     //init glad
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
@@ -32,10 +34,12 @@ int main(void)
     }    
 
     /* Loop until the user closes the window */
-    glClearColor(0.0, 0.7, 0.0, 1.0);
+    
     while (!glfwWindowShouldClose(window))
     {
+        processInput(window);
         /* Render here */
+        glClearColor(0.0, 0.7, 0.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT);
         
         
@@ -56,4 +60,17 @@ int main(void)
 
     glfwTerminate();
     return 0;
+}
+
+void processInput(GLFWwindow *window)
+{
+    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
+}
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    // make sure the viewport matches the new window dimensions; note that width and 
+    // height will be significantly larger than specified on retina displays.
+    glViewport(0, 0, width, height);
 }
