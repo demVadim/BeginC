@@ -11,21 +11,28 @@ const unsigned int SCR_HEIGHT = 600;
 
 int main(void)
 {
-    GLFWwindow* window;
-
     /* Initialize the library */
     if (!glfwInit())
-        return -1;
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Hello World", NULL, NULL);
-    if (!window)
     {
+        std::cout<<"glfwInit failed"<<std::endl;
+        return -1;
+    }
+
+    //glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    //glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+    //glfwWindowHint(GLFW_OPENGL_PROFILE,GLFW_OPENGL_CORE_PROFILE);
+
+    /* Create a windowed mode window and its OpenGL context */
+    GLFWwindow* pWindow = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Hello World", nullptr, nullptr);
+    if (!pWindow)
+    {
+        std::cout<<"\n glfwCreateWindow failed \n"<<std::endl;
         glfwTerminate();
         return -1;
     }
     /* Make the window's context current */
-    glfwMakeContextCurrent(window);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwMakeContextCurrent(pWindow);
+    glfwSetFramebufferSizeCallback(pWindow, framebuffer_size_callback);
     //init glad
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
@@ -35,9 +42,9 @@ int main(void)
 
     /* Loop until the user closes the window */
     
-    while (!glfwWindowShouldClose(window))
+    while (!glfwWindowShouldClose(pWindow))
     {
-        processInput(window);
+        processInput(pWindow);
         /* Render here */
         glClearColor(0.0, 0.7, 0.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT);
@@ -52,7 +59,7 @@ int main(void)
         glEnd();
 
         /* Swap front and back buffers */
-        glfwSwapBuffers(window);
+        glfwSwapBuffers(pWindow);
 
         /* Poll for and process events */
         glfwPollEvents();
@@ -62,13 +69,13 @@ int main(void)
     return 0;
 }
 
-void processInput(GLFWwindow *window)
+void processInput(GLFWwindow *pWindow)
 {
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
+    if(glfwGetKey(pWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(pWindow, true);
 }
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+void framebuffer_size_callback(GLFWwindow* pWindow, int width, int height)
 {
     // make sure the viewport matches the new window dimensions; note that width and 
     // height will be significantly larger than specified on retina displays.
