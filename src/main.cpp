@@ -38,7 +38,10 @@ int main(void)
     {
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
-    }    
+    }  
+
+    std::cout << "Renderer : " << glGetString(GL_RENDERER) << std::endl;  
+    std::cout << "GL version : " << glGetString(GL_VERSION) << std::endl;  
 
     /* Loop until the user closes the window */
     
